@@ -10,6 +10,13 @@
     <div class="container">
         <br><br>
         <h1>Cadastre um aluno </h1>
+        {% if status == '1' %}
+        <p>Nome ou idade inválidos</p>
+
+        {% elif status == '0' %}
+        <p>Dados cadastrados com sucesso</p>
+
+        {% endif %}
         <hr>
         <form action="{% url 'criar_aluno' %}" method="POST">{% csrf_token %}
           <label for="">Nome: </label>

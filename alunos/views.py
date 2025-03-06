@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 
 def criar_aluno(request):
+    print(request.method)
     return render(request,'criar_aluno.html')
 
 def listar(request):

@@ -7,8 +7,8 @@ from .models import Aluno
 def criar_aluno(request):
     if request.method == 'GET':
         status = request.GET.get('status')
-        
-        return render(request, 'criar_aluno.html',{'status':status})
+        alunos = Aluno.objects.all()
+        return render(request, 'criar_aluno.html',{'status':status, "alunos": alunos})
     elif request.method == 'POST':
         nome = request.POST.get('nome')
         idade = request.POST.get('idade')
@@ -18,7 +18,6 @@ def criar_aluno(request):
             return redirect('/alunos/criar_aluno/?status=1') #status = 1 na URL
 
 
-
         aluno = Aluno(nome=nome, idade=idade, email=email)
         aluno.save()
         return redirect('/alunos/criar_aluno/?status=0')
@@ -26,3 +25,9 @@ def criar_aluno(request):
 
 def listar(request):
     return HttpResponse("Listei")
+    
+    
+def deletar_aluno(request,id):
+    aluno= Aluno.objects.get(id=id)
+    aluno.delete()
+    return redirect ('criar_aluno')
